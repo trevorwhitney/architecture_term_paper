@@ -4,7 +4,7 @@
 #include <cblas.h>
 
 double my_dgemm(int n, double *a, double *b, double *c);
-double my_cblas_dgemm(int n, double *a, double *b, float *c);
+double my_cblas_dgemm(int n, double *a, double *b, double *c);
 
 double my_dgemm (int n, double *a, double *b, double *c) {
   //iterators
@@ -25,7 +25,7 @@ double my_dgemm (int n, double *a, double *b, double *c) {
   return elapsed_time;
 }
 
-double my_cblas_dgemm(int n, double *a, double *b, float *c) {
+double my_cblas_dgemm(int n, double *a, double *b, double *c) {
   clock_t start, end;
   double elapsed_time;
   
