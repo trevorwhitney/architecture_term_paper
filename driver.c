@@ -31,7 +31,7 @@ int main (int argc, int *argv[]) {
     elapsed_time = my_dgemm(size, a, b, c);
     fprintf(my_csv, "%d, %d, %.2f\n", i, size, elapsed_time);
 
-    elapsed_time = my_cblas_dgemm(size, &a, &b, c);
+    elapsed_time = my_cblas_dgemm(size, a, b, c);
     fprintf(atlas_csv, "%d, %d, %.2f\n", i, size, elapsed_time);
 
   }
