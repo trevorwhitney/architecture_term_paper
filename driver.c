@@ -1,4 +1,3 @@
-#include <atlas.h>
 #include "my_dgemm.h"
 
 int main (int argc, int *argv[]) {
@@ -9,10 +8,10 @@ int main (int argc, int *argv[]) {
 
   int i, j, k, l, size;
   double elapsed_time;
-  FILE *csv;
+  FILE *my_csv, *atlas_csv;
 
   my_csv = fopen("my_dgemm.csv", "a+");
-  atlast_csv = fopen("atlas.csv", "a+");
+  atlas_csv = fopen("atlas.csv", "a+");
   fprintf(my_csv, "Iteration #, Size of Array, Time (Seconds)\n");
   fprintf(atlas_csv, "Iteration #, Size of Array, Time (Seconds)\n");
 
