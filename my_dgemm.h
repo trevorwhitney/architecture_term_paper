@@ -31,7 +31,7 @@ double my_cblas_dgemm(int n, double *a, double *b, double *c) {
   
   start = clock();
   cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,
-    n, n, n, 1, a, n, b, n, 0, *c, n);
+    n, n, n, 1, a, n, b, n, 0, c, n);
   end = clock();
 
   elapsed_time = ((double) (end-start))/CLOCKS_PER_SEC;
