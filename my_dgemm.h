@@ -4,7 +4,7 @@
 #include <cblas.h>
 
 double my_dgemm(int n, double *a, double *b, double *c);
-double my_cblas_dgemm(int n, double a, double b, float *c);
+double my_cblas_dgemm(int n, double *a, double *b, float *c);
 
 double my_dgemm (int n, double *a, double *b, double *c) {
   //iterators
