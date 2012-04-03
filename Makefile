@@ -10,3 +10,9 @@ driver: driver.c my_dgemm.h
 
 clean:
 	rm $(EXECS)
+
+optimizations: driver.c my_dgemm.h
+	gcc -O1 -lcblas -lblas -o driver_O1 driver.c
+	gcc -O2 -lcblas -lblas -o driver_O2 driver.c
+	gcc -O3 -lcblas -lblas -o driver_O3 driver.c
+	gcc -O3 -funroll-loops -lcblas -lblas -o driver_O3_funroll driver.c
