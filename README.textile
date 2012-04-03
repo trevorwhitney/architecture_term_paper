@@ -1,0 +1,3 @@
+h1. CSCI-564 Advanced Architecture
+
+p. This repository contains the code for my term paper for CSCI-564 at the Colorado School of Mines. The goal of the term paper is to analyze the performance of matrix multipliaction on a core i7 machine, and to explore various optimization options.
