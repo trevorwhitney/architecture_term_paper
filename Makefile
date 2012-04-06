@@ -16,3 +16,6 @@ optimizations: driver.c my_dgemm.h
 	gcc -O2 -lcblas -lblas -o driver_O2 driver.c
 	gcc -O3 -lcblas -lblas -o driver_O3 driver.c
 	gcc -O3 -funroll-loops -lcblas -lblas -o driver_O3_funroll driver.c
+
+tiles: driver.c my_dgemm.h
+	gcc -lcblas -lblas -o tiles driver.c
