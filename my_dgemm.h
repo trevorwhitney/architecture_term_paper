@@ -53,7 +53,7 @@ double step01(int n, double *a, double *b, double *c, int t) {
       for (j = 0; j < n; j++) {
         for (k = kk; k < MIN((kk+t-1), n); k++) {
           r = b[k+n*j];
-          for (i = ii; i < MIN(ii+t-1), n); i++) {
+          for (i = ii; i < MIN((ii+t-1), n); i++) {
             c[i+n*j] = c[i+n*j] + a[i+n*k] * b[k+n*j];
           }
         }
