@@ -16,7 +16,7 @@ int main (int argc, int *argv[]) {
   //fprintf(my_csv, "Iteration #, Size of Array, Time (Seconds)\n");
   //fprintf(atlas_csv, "Iteration #, Size of Array, Time (Seconds)\n");
 
-  results = fopent("tiles.csv", "a+");
+  results = fopen("tiles.csv", "a+");
   fprintf(results, "Iteration #, Size of Array, Size of Tiles, Time (Seconds)\n");
 
 
