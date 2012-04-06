@@ -42,7 +42,7 @@ double my_cblas_dgemm(int n, double *a, double *b, double *c) {
 }
 
 double step01(int n, double *a, double *b, double *c, int t) {
-  int i, j ,k, ii, kk, t;
+  int i, j ,k, ii, kk;
   clock_t start, end;
   double elapsed_time;
   register double r;
