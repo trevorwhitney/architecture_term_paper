@@ -20,7 +20,7 @@ int main (int argc, int *argv[]) {
   fprintf(results, "Iteration #, Size of Array, Size of Tiles, Time (Seconds)\n");
 
 
-  for (i = 1; i <= 10; i++) {
+  for (i = 1; i <= 4; i++) {
     printf("Starting iteration %d\n", i);
     size = i * 500;
     a = (double*) malloc(size*size*sizeof(double));
