@@ -18,7 +18,7 @@ double error(double *my_c, double *atlas_c, int n) {
   double numerator;
   double denomenator;
   double error;
-  double n;
+  double size;
 
   size = n*n;
   numerator = 0;
@@ -28,7 +28,7 @@ double error(double *my_c, double *atlas_c, int n) {
     denomenator += my_c[i];
   }
 
-  error = (numerator*numerator)/(denomenator*denomenator)
+  error = (numerator*numerator)/(denomenator*denomenator);
   return error;
 }
 
@@ -126,7 +126,7 @@ double step03(int n, double *a, double *b, double *c, int t) {
       for (ii = 1; ii < n; ii += t) {
         for (j = jj; j < MIN((jj+t-1), n); j++) {
           for (i = ii; i < MIN((ii+t-1), n); i++) {
-            r = c[i_n*j];
+            r = c[i+n*j];
             for (k = kk; k < MIN((kk+t-1), n); k++) {
               r += b[k+n*j] * a[i+n*k];
             }
@@ -153,7 +153,7 @@ double step04(int n, double *a, double *b, double *c, int t) {
       for (ii = 1; ii < n; ii += t) {
         for (j = jj; j < MIN((jj+t-1), n); j++) {
           for (i = ii; i < MIN((ii+t-1), n); i++) {
-            r = c[i_n*j];
+            r = c[i+n*j];
             for (k = kk; k < MIN((kk+t-1), n); k+=8) {
               r += b[k+n*j] * a[i+n*k];
               r += b[k+n*j] * a[i+n*(k+1)];
