@@ -5,9 +5,31 @@
 
 #define MIN(a,b) ( (a) < (b) ? (a) : (b))
 
+double error(double *my_c, double *atlas_c, int n);
 double my_dgemm(int n, double *a, double *b, double *c);
 double my_cblas_dgemm(int n, double *a, double *b, double *c);
 double step01(int n, double *a, double *b, double *c, int t);
+double step02(int n, double *a, double *b, double *c, int t);
+double step03(int n, double *a, double *b, double *c, int t);
+double step04(int n, double *a, double *b, double *c, int t);
+
+double error(double *my_c, double *atlas_c, int n) {
+  int i;
+  double numerator;
+  double denomenator;
+  double error;
+
+  size = n*n;
+  numerator = 0;
+  denomenator = 0;
+  for (i = 0; i < size; i++) {
+    numerator += my_c[i] - atlas_c[i];
+    denomenator += my_c[i];
+  }
+
+  error = (numerator*numerator)/(denomenator*denomenator)
+  return error;
+}
 
 double my_dgemm (int n, double *a, double *b, double *c) {
   //iterators
@@ -54,7 +76,94 @@ double step01(int n, double *a, double *b, double *c, int t) {
         for (k = kk; k < MIN((kk+t-1), n); k++) {
           r = b[k+n*j];
           for (i = ii; i < MIN((ii+t-1), n); i++) {
-            c[i+n*j] = c[i+n*j] + a[i+n*k] * b[k+n*j];
+            c[i+n*j] = c[i+n*j] + r * a[i+n*k];
+          }
+        }
+      }
+    }
+  }
+  end = clock();
+  elapsed_time = ((double) (end-start))/CLOCKS_PER_SEC;
+  return elapsed_time;
+}
+
+double step02(int n, double *a, double *b, double *c, int t) {
+  int i, j ,k, ii, jj, kk;
+  clock_t start, end;
+  double elapsed_time;
+  register double r;
+
+  start = clock();
+  for (jj = 1; jj < n; jj += t) {
+    for (kk = 1; kk < n; kk += t) {
+      for (ii = 1; ii < n; ii += t) {
+        for (j = jj; j < MIN((jj+t-1), n); j++) {
+          for (k = kk; k < MIN((kk+t-1), n); k++) {
+            r = b[k+n*j];
+            for (i = ii; i < MIN((ii+t-1), n); i++) {
+              c[i+n*j] = c[i+n*j] + r * a[i+n*k];
+            }
+          }
+        }
+      }
+    }
+  }
+  end = clock();
+  elapsed_time = ((double) (end-start))/CLOCKS_PER_SEC;
+  return elapsed_time;
+}
+
+double step03(int n, double *a, double *b, double *c, int t) {
+  int i, j ,k, ii, jj, kk;
+  clock_t start, end;
+  double elapsed_time;
+  register double r;
+
+  start = clock();
+  for (jj = 1; jj < n; jj += t) {
+    for (kk = 1; kk < n; kk += t) {
+      for (ii = 1; ii < n; ii += t) {
+        for (j = jj; j < MIN((jj+t-1), n); j++) {
+          for (i = ii; i < MIN((ii+t-1), n); i++) {
+            r = c[i_n*j];
+            for (k = kk; k < MIN((kk+t-1), n); k++) {
+              r += b[k+n*j] * a[i+n*k];
+            }
+            c[i+n*j] = r;
+          }
+        }
+      }
+    }
+  }
+  end = clock();
+  elapsed_time = ((double) (end-start))/CLOCKS_PER_SEC;
+  return elapsed_time;
+}
+
+double step04(int n, double *a, double *b, double *c, int t) {
+  int i, j ,k, ii, jj, kk;
+  clock_t start, end;
+  double elapsed_time;
+  register double r;
+
+  start = clock();
+  for (jj = 1; jj < n; jj += t) {
+    for (kk = 1; kk < n; kk += t) {
+      for (ii = 1; ii < n; ii += t) {
+        for (j = jj; j < MIN((jj+t-1), n); j++) {
+          for (i = ii; i < MIN((ii+t-1), n); i++) {
+            r = c[i_n*j];
+            for (k = kk; k < MIN((kk+t-1), n); k+=8) {
+              r += b[k+n*j] * a[i+n*k];
+              r += b[k+n*j] * a[i+n*(k+1)];
+              r += b[k+n*j] * a[i+n*(k+2)];
+              r += b[k+n*j] * a[i+n*(k+3)];
+              r += b[k+n*j] * a[i+n*(k+4)];
+              r += b[k+n*j] * a[i+n*(k+5)];
+              r += b[k+n*j] * a[i+n*(k+6)];
+              r += b[k+n*j] * a[i+n*(k+7)];
+            }
+            c[i+n*j] = r;
           }
         }
       }
