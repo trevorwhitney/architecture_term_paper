@@ -18,6 +18,7 @@ double error(double *my_c, double *atlas_c, int n) {
   double numerator;
   double denomenator;
   double error;
+  double n;
 
   size = n*n;
   numerator = 0;
