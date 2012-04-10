@@ -1,5 +1,7 @@
 #include "my_dgemm.h"
 
+void reset_array(int n, double *c);
+
 int main (int argc, int *argv[]) {
   //matrices
   double* a;
@@ -24,8 +26,8 @@ int main (int argc, int *argv[]) {
     atlas_c = (double*) malloc(size*size*sizeof(double));
 
     for (j = 0; j < size * size; j++) {
-      a[j] = (j % 64);
-      b[j] = (j % 64);
+      a[j] = (j % 64.0);
+      b[j] = (j % 64.0);
     }
 
     //set tile size
@@ -40,21 +42,25 @@ int main (int argc, int *argv[]) {
     elapsed_time = my_dgemm(size, a, b, c);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "my_dgemm, %d, %d, %.2f, %.20f\n", size, t, elapsed_time, error);
-    
+    reset_array(size, c);
+
     //step01
     elapsed_time = step01(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step01, %d, %d, %.2f, %.20f\n", size, t, elapsed_time, error);
+    reset_array(size, c);
 
     //step02
     elapsed_time = step02(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step02, %d, %d, %.2f, %.20f\n", size, t, elapsed_time, error);
+    reset_array(size, c);
 
     //step03
     elapsed_time = step03(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step03, %d, %d, %.2f, %.20f\n", size, t, elapsed_time, error);
+    reset_array(size, c);
 
     //step04
     elapsed_time = step04(size, a, b, c, t);
@@ -66,4 +72,14 @@ int main (int argc, int *argv[]) {
   fclose(results);
 
   return 0;
+}
+
+void reset_array(int n, double *c) {
+  int i, j;
+
+  c = (double*) malloc(n*n*sizeof(double));
+
+  for (i = 0; i < n; i++)
+    for (j = 0; j < n; j++)
+      c[i + n*j] = 0.0;
 }
