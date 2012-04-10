@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <cblas.h>
+#include <math.h>
 
 #define MIN(a,b) ( (a) < (b) ? (a) : (b))
 
@@ -24,11 +25,11 @@ double calculate_error(double *my_c, double *atlas_c, int n) {
   numerator = 0;
   denomenator = 0;
   for (i = 0; i < size; i++) {
-    numerator += my_c[i] - atlas_c[i];
-    denomenator += my_c[i];
+    numerator += pow((my_c[i] - atlas_c[i]), 2);
+    denomenator += pow((my_c[i]), 2);
   }
 
-  error = (numerator*numerator)/(denomenator*denomenator);
+  error = sqrt(numerator)/sqrt(denomenator);
   return error;
 }
 
@@ -154,7 +155,7 @@ double step04(int n, double *a, double *b, double *c, int t) {
         for (j = jj; j < MIN((jj+t-1), n); j++) {
           for (i = ii; i < MIN((ii+t-1), n); i++) {
             r = c[i+n*j];
-            for (k = kk; k < MIN((kk+t-1), n); k+=8) {
+            for (k = kk; k < MIN((kk+t-9), n-8); k+=8) {
               r += b[k+n*j] * a[i+n*k];
               r += b[k+n*j] * a[i+n*(k+1)];
               r += b[k+n*j] * a[i+n*(k+2)];

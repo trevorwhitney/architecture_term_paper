@@ -33,27 +33,28 @@ int main (int argc, int *argv[]) {
 
     //baseline
     elapsed_time = my_cblas_dgemm(size, a, b, atlas_c);
-    fprintf(results, "atlas, %d, %d, %.2f, 0\n", size, t, elapsed_time);
+    error = calculate_error(atlas_c, atlas_c, size);
+    fprintf(results, "atlas, %d, %d, %.2f, %.20f\n", size, t, elapsed_time, error);
     
     //step01
     elapsed_time = step01(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
-    fprintf(results, "step01, %d, %d, %.2f, %.5f\n", size, t, elapsed_time, error);
+    fprintf(results, "step01, %d, %d, %.2f, %.20f\n", size, t, elapsed_time, error);
 
     //step02
     elapsed_time = step02(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
-    fprintf(results, "step02, %d, %d, %.2f, %.5f\n", size, t, elapsed_time, error);
+    fprintf(results, "step02, %d, %d, %.2f, %.20f\n", size, t, elapsed_time, error);
 
     //step03
     elapsed_time = step03(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
-    fprintf(results, "step03, %d, %d, %.2f, %.5f\n", size, t, elapsed_time, error);
+    fprintf(results, "step03, %d, %d, %.2f, %.20f\n", size, t, elapsed_time, error);
 
     //step04
     elapsed_time = step04(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
-    fprintf(results, "step04, %d, %d, %.2f, %.5f\n", size, t, elapsed_time, error);
+    fprintf(results, "step04, %d, %d, %.2f, %.20f\n", size, t, elapsed_time, error);
 
   }
 
