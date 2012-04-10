@@ -142,7 +142,7 @@ double step03(int n, double *a, double *b, double *c, int t) {
 }
 
 double step04(int n, double *a, double *b, double *c, int t) {
-  int i, j ,k, ii, jj, kk;
+  int i, j ,k, ii, jj, kk, dif;
   clock_t start, end;
   double elapsed_time;
   register double r;
@@ -163,6 +163,11 @@ double step04(int n, double *a, double *b, double *c, int t) {
               r += b[k+n*j] * a[i+n*(k+5)];
               r += b[k+n*j] * a[i+n*(k+6)];
               r += b[k+n*j] * a[i+n*(k+7)];
+            }
+            if (n%8 > 0) {
+              dif = n%8 - 1;
+              while (dif > -1)
+                r += b[k+n*j] * a[i+n*(n-dif--)];
             }
             c[i+n*j] = r;
           }
