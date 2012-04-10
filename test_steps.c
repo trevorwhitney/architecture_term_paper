@@ -19,7 +19,7 @@ int main (int argc, int *argv[]) {
 
   for (i = 1; i <= 4; i++) {
     printf("Starting iteration %d\n", i);
-    size = i * 50;
+    size = i * 500;
     a = (double*) malloc(size*size*sizeof(double));
     b = (double*) malloc(size*size*sizeof(double));
     c = (double*) malloc(size*size*sizeof(double));
@@ -48,12 +48,14 @@ int main (int argc, int *argv[]) {
     elapsed_time = step01(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step01, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
+    /*
     for (i = 0; i < size; i++) {
       for (j = 0; j < size; j++) {
         k = i+size*j;
         printf("step01[%d] = %.5f, atlas[%d] = %.5f\n", k, c[k], k, atlas_c[k]);
       }
     }
+    */
     zero_array(size, c);
 
     //step02
