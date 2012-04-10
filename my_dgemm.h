@@ -116,7 +116,7 @@ double step02(int n, double *a, double *b, double *c, int t) {
 }
 
 double step03(int n, double *a, double *b, double *c, int t) {
-  int i, j ,k, ii, jj, kk;
+  int i, j ,k, ii, jj, kk, nxj;
   clock_t start, end;
   double elapsed_time;
   register double r;
@@ -127,11 +127,12 @@ double step03(int n, double *a, double *b, double *c, int t) {
       for (ii = 0; ii < n; ii += t) {
         for (j = jj; j < MIN(jj+t, n); j++) {
           for (i = ii; i < MIN(ii+t, n); i++) {
-            r = c[n*j+i];
+            nxj = n*j;
+            r = c[nxj+i];
             for (k = kk; k < MIN(kk+t, n); k++) {
-              r += b[n*j+k] * a[n*i+k];
+              r = r + b[nxj+k] * a[n*k+i];
             }
-            c[n*j+i] = r;
+            c[nxj+i] = r;
           }
         }
       }
@@ -143,7 +144,7 @@ double step03(int n, double *a, double *b, double *c, int t) {
 }
 
 double step04(int n, double *a, double *b, double *c, int t) {
-  int i, j ,k, ii, jj, kk, dif, nxj;
+  int i, j ,k, ii, jj, kk, dif, nxj, nxi;
   clock_t start, end;
   double elapsed_time;
   register double r;
@@ -154,22 +155,23 @@ double step04(int n, double *a, double *b, double *c, int t) {
       for (ii = 0; ii < n; ii += t) {
         for (j = jj; j < MIN(jj+t, n); j++) {
           for (i = ii; i < MIN(ii+t, n); i++) {
-            r = c[i+n*j];
             nxj = n*j;
+            nxi = n*i;
+            r = c[nxj+i];
             for (k = kk; k < MIN((kk+t-8), n-8); k+=8) {
-              r += b[k+nxj] * a[i+n*k];
-              r += b[k+nxj] * a[i+n*(k+1)];
-              r += b[k+nxj] * a[i+n*(k+2)];
-              r += b[k+nxj] * a[i+n*(k+3)];
-              r += b[k+nxj] * a[i+n*(k+4)];
-              r += b[k+nxj] * a[i+n*(k+5)];
-              r += b[k+nxj] * a[i+n*(k+6)];
-              r += b[k+nxj] * a[i+n*(k+7)];
+              r += b[k+nxj] * a[nxi+k];
+              r += b[k+nxj] * a[nxi+(k+1)];
+              r += b[k+nxj] * a[nxi+(k+2)];
+              r += b[k+nxj] * a[nxi+(k+3)];
+              r += b[k+nxj] * a[nxi+(k+4)];
+              r += b[k+nxj] * a[nxi+(k+5)];
+              r += b[k+nxj] * a[nxi+(k+6)];
+              r += b[k+nxj] * a[nxi+(k+7)];
             }
             if (n%8 > 0) {
               dif = n%8 - 1;
               while (dif > -1)
-                r += b[k+nxj] * a[i+n*(n-dif--)];
+                r += b[k+nxj] * a[nxi+(n-dif--)];
             }
             c[i+nxj] = r;
           }
