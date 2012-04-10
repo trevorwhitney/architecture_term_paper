@@ -2,3 +2,7 @@
 10 - O2
 08 - O3
 06 - O3_funroll
+
+Tiles:
+orig - 12
+new - 4

@@ -5,22 +5,22 @@ int main (int argc, int *argv[]) {
   double* a;
   double* b;
   double* c;
+  double* atlas_c;
 
   int i, j, k, l, size, t;
-  double elapsed_time;
+  double elapsed_time, error;
   //FILE *my_csv, *atlas_csv;
-  FILE *results;
+  FILE *results, *atlas_csv;
 
   //my_csv = fopen("my_dgemm.csv", "a+");
-  //atlas_csv = fopen("atlas.csv", "a+");
-  //fprintf(my_csv, "Iteration #, Size of Array, Time (Seconds)\n");
-  //fprintf(atlas_csv, "Iteration #, Size of Array, Time (Seconds)\n");
-
+  atlas_csv = fopen("atlas.csv", "a+");
   results = fopen("tiles.csv", "a+");
-  fprintf(results, "Iteration #, Size of Array, Size of Tiles, Time (Seconds)\n");
+  fprintf(results, "Iteration #, Size of Array, Size of Tiles, Time (Seconds), Error\n");
+  //fprintf(my_csv, "Iteration #, Size of Array, Time (Seconds)\n");
+  fprintf(atlas_csv, "Iteration #, Size of Array, Time (Seconds)\n");
 
 
-  for (i = 1; i <= 4; i++) {
+  for (i = 1; i <= 10; i++) {
     printf("Starting iteration %d\n", i);
     size = i * 500;
     a = (double*) malloc(size*size*sizeof(double));
@@ -32,16 +32,17 @@ int main (int argc, int *argv[]) {
       b[j] = (j % 64);
     }
 
-    for(t = 2; t < 250; t++) {
+    elapsed_time = my_cblas_dgemm(size, a, b, atlas_c);
+    fprintf(atlas_csv, "%d, %d, %.2f\n", i, size, elapsed_time);
+
+    for(t = 7; t < 11; t++) {
       elapsed_time = step01(size, a, b, c, t);
-      fprintf(results, "%d, %d, %d, %.2f\n", i, size, t, elapsed_time);
+      error = error(c, atlas_c, size);
+      fprintf(results, "%d, %d, %d, %.2f, %.5f\n", i, size, t, elapsed_time, error);
     }
 
     //elapsed_time = my_dgemm(size, a, b, c);
     //fprintf(my_csv, "%d, %d, %.2f\n", i, size, elapsed_time);
-
-    //elapsed_time = my_cblas_dgemm(size, a, b, c);
-    //fprintf(atlas_csv, "%d, %d, %.2f\n", i, size, elapsed_time);
 
   }
 
