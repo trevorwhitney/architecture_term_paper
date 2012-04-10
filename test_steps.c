@@ -51,6 +51,7 @@ int main (int argc, int *argv[]) {
     zero_array(size, c);
 
     //step02
+    /*
     elapsed_time = step02(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step02, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
@@ -66,7 +67,7 @@ int main (int argc, int *argv[]) {
     elapsed_time = step04(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step04, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
-
+    */
   }
 
   fclose(results);

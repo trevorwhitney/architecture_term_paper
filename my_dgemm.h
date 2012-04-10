@@ -72,8 +72,8 @@ double step01(int n, double *a, double *b, double *c, int t) {
   register double r;
 
   start = clock();
-  for (kk = 1; kk < n; kk += t) {
-    for (ii = 1; ii < n; ii += t) {
+  for (kk = 0; kk < n; kk += t) {
+    for (ii = 0; ii < n; ii += t) {
       for (j = 0; j < n; j++) {
         for (k = kk; k < MIN(kk+t, n); k++) {
           r = b[n*j+k];
