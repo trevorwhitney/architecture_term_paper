@@ -15,21 +15,21 @@ double step03(int n, double *a, double *b, double *c, int t);
 double step04(int n, double *a, double *b, double *c, int t);
 
 double calculate_error(double *my_c, double *atlas_c, int n) {
-  int i;
+  int i, j;
   double numerator;
   double denomenator;
   double error;
-  double size;
 
-  size = n*n;
-  numerator = 0;
-  denomenator = 0;
-  for (i = 0; i < size; i++) {
-    numerator += pow((my_c[i] - atlas_c[i]), 2);
-    denomenator += pow((atlas_c[i]), 2);
+  numerator = 0.0;
+  denomenator = 0.0;
+  for (i = 0; i < n; i++) {
+    for (j = 0; j < n; j++) {
+      numerator += pow((my_c[i + n*j] - atlas_c[i + n*j]), 2);
+      denomenator += pow((atlas_c[i + n*j]), 2);
+    }
   }
 
-  error = sqrt(numerator)/sqrt(denomenator);
+  error = numerator/denomenator;
   return error;
 }
 
