@@ -144,12 +144,13 @@ double step03(int n, double *a, double *b, double *c, int t) {
 }
 
 double step04(int n, double *a, double *b, double *c, int t) {
-  int i, j ,k, ii, jj, kk, dif, nxj;
+  int i, j ,k, ii, jj, kk, dif, nxj, mod, modk;
   clock_t start, end;
   double elapsed_time;
   register double r;
 
   start = clock();
+  mod = n%8;
   for (jj = 0; jj < n; jj += t) {
     for (kk = 0; kk < n; kk += t) {
       for (ii = 0; ii < n; ii += t) {
@@ -157,7 +158,7 @@ double step04(int n, double *a, double *b, double *c, int t) {
           for (i = ii; i < MIN(ii+t, n); i++) {
             nxj = n*j;
             r = c[nxj+i];
-            for (k = kk; k < MIN((kk+t-(n%8)), n-(n%8)); k+=8) {
+            for (k = kk; k < MIN(kk+t, n-mod); k = k + 8) {
               r = r + b[k+nxj] * a[n*k+i];
               r = r + b[k+nxj] * a[n*(k+1)+i];
               r = r + b[k+nxj] * a[n*(k+2)+i];
@@ -166,10 +167,12 @@ double step04(int n, double *a, double *b, double *c, int t) {
               r = r + b[k+nxj] * a[n*(k+5)+i];
               r = r + b[k+nxj] * a[n*(k+6)+i];
               r = r + b[k+nxj] * a[n*(k+7)+i];
+              modk = k + 8;
             }
-            if (n%8 > 0) {
-              for (dif = 0; dif < n%8; dif++)
-                r = r + b[k+nxj] * a[n*(n-dif)+i];
+
+            if (mod > 0) {
+              for (k = modk; k < n; k++)
+                r = r + b[k+nxj] * a[n*k+i];
             }
             c[i+nxj] = r;
           }
