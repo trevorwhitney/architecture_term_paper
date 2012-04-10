@@ -26,6 +26,7 @@ int main (int argc, int *argv[]) {
     a = (double*) malloc(size*size*sizeof(double));
     b = (double*) malloc(size*size*sizeof(double));
     c = (double*) malloc(size*size*sizeof(double));
+    atlas_c = (double*) malloc(size*size*sizeof(double));
 
     for (j = 0; j < size * size; j++) {
       a[j] = (j % 64);
