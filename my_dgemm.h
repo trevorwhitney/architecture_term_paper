@@ -96,14 +96,14 @@ double step02(int n, double *a, double *b, double *c, int t) {
   register double r;
 
   start = clock();
-  for (jj = 1; jj < n; jj += t) {
-    for (kk = 1; kk < n; kk += t) {
-      for (ii = 1; ii < n; ii += t) {
-        for (j = jj; j < MIN((jj+t-1), n); j++) {
-          for (k = kk; k < MIN((kk+t-1), n); k++) {
-            r = b[k+n*j];
-            for (i = ii; i < MIN((ii+t-1), n); i++) {
-              c[i+n*j] = c[i+n*j] + r * a[i+n*k];
+  for (jj = 0; jj < n; jj += t) {
+    for (kk = 0; kk < n; kk += t) {
+      for (ii = 0; ii < n; ii += t) {
+        for (j = jj; j < MIN(jj+t, n); j++) {
+          for (k = kk; k < MIN(kk+t, n); k++) {
+            r = b[n*j+k];
+            for (i = ii; i < MIN(ii+t, n); i++) {
+              c[n*j+i] = c[n*j+i] + r * a[n*k+i];
             }
           }
         }
@@ -122,16 +122,16 @@ double step03(int n, double *a, double *b, double *c, int t) {
   register double r;
 
   start = clock();
-  for (jj = 1; jj < n; jj += t) {
-    for (kk = 1; kk < n; kk += t) {
-      for (ii = 1; ii < n; ii += t) {
-        for (j = jj; j < MIN((jj+t-1), n); j++) {
-          for (i = ii; i < MIN((ii+t-1), n); i++) {
-            r = c[i+n*j];
-            for (k = kk; k < MIN((kk+t-1), n); k++) {
-              r += b[k+n*j] * a[i+n*k];
+  for (jj = 0; jj < n; jj += t) {
+    for (kk = 0; kk < n; kk += t) {
+      for (ii = 0; ii < n; ii += t) {
+        for (j = jj; j < MIN(jj+t, n); j++) {
+          for (i = ii; i < MIN(ii+t, n); i++) {
+            r = c[n*j+i];
+            for (k = kk; k < MIN(kk+t, n); k++) {
+              r += b[n*j+k] * a[n*i+k];
             }
-            c[i+n*j] = r;
+            c[n*j+i] = r;
           }
         }
       }
@@ -143,34 +143,35 @@ double step03(int n, double *a, double *b, double *c, int t) {
 }
 
 double step04(int n, double *a, double *b, double *c, int t) {
-  int i, j ,k, ii, jj, kk, dif;
+  int i, j ,k, ii, jj, kk, dif, nxj;
   clock_t start, end;
   double elapsed_time;
   register double r;
 
   start = clock();
-  for (jj = 1; jj < n; jj += t) {
-    for (kk = 1; kk < n; kk += t) {
-      for (ii = 1; ii < n; ii += t) {
-        for (j = jj; j < MIN((jj+t-1), n); j++) {
-          for (i = ii; i < MIN((ii+t-1), n); i++) {
+  for (jj = 0; jj < n; jj += t) {
+    for (kk = 0; kk < n; kk += t) {
+      for (ii = 0; ii < n; ii += t) {
+        for (j = jj; j < MIN(jj+t, n); j++) {
+          for (i = ii; i < MIN(ii+t, n); i++) {
             r = c[i+n*j];
-            for (k = kk; k < MIN((kk+t-9), n-8); k+=8) {
-              r += b[k+n*j] * a[i+n*k];
-              r += b[k+n*j] * a[i+n*(k+1)];
-              r += b[k+n*j] * a[i+n*(k+2)];
-              r += b[k+n*j] * a[i+n*(k+3)];
-              r += b[k+n*j] * a[i+n*(k+4)];
-              r += b[k+n*j] * a[i+n*(k+5)];
-              r += b[k+n*j] * a[i+n*(k+6)];
-              r += b[k+n*j] * a[i+n*(k+7)];
+            nxj = n*j;
+            for (k = kk; k < MIN((kk+t-8), n-8); k+=8) {
+              r += b[k+nxj] * a[i+n*k];
+              r += b[k+nxj] * a[i+n*(k+1)];
+              r += b[k+nxj] * a[i+n*(k+2)];
+              r += b[k+nxj] * a[i+n*(k+3)];
+              r += b[k+nxj] * a[i+n*(k+4)];
+              r += b[k+nxj] * a[i+n*(k+5)];
+              r += b[k+nxj] * a[i+n*(k+6)];
+              r += b[k+nxj] * a[i+n*(k+7)];
             }
             if (n%8 > 0) {
               dif = n%8 - 1;
               while (dif > -1)
-                r += b[k+n*j] * a[i+n*(n-dif--)];
+                r += b[k+nxj] * a[i+n*(n-dif--)];
             }
-            c[i+n*j] = r;
+            c[i+nxj] = r;
           }
         }
       }
