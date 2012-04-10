@@ -168,6 +168,10 @@ double step04(int n, double *a, double *b, double *c, int t) {
               r = r + b[nxj+k+7] * a[n*(k+7)+i];
             }
 
+            if (k > n)
+              for(k = k - 7; k < n; k++)
+                r = r + b[nxj+k] * a[n*k+i];
+
             c[nxj+i] = r;
           }
         }
