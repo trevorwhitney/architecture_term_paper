@@ -37,7 +37,7 @@ int main (int argc, int *argv[]) {
 
     for(t = 7; t < 11; t++) {
       elapsed_time = step01(size, a, b, c, t);
-      error = error(c, atlas_c, size);
+      error = calculate_error(c, atlas_c, size);
       fprintf(results, "%d, %d, %d, %.2f, %.5f\n", i, size, t, elapsed_time, error);
     }
 

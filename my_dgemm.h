@@ -5,7 +5,7 @@
 
 #define MIN(a,b) ( (a) < (b) ? (a) : (b))
 
-double error(double *my_c, double *atlas_c, int n);
+double calculate_error(double *my_c, double *atlas_c, int n);
 double my_dgemm(int n, double *a, double *b, double *c);
 double my_cblas_dgemm(int n, double *a, double *b, double *c);
 double step01(int n, double *a, double *b, double *c, int t);
@@ -13,7 +13,7 @@ double step02(int n, double *a, double *b, double *c, int t);
 double step03(int n, double *a, double *b, double *c, int t);
 double step04(int n, double *a, double *b, double *c, int t);
 
-double error(double *my_c, double *atlas_c, int n) {
+double calculate_error(double *my_c, double *atlas_c, int n) {
   int i;
   double numerator;
   double denomenator;
