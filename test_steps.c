@@ -36,6 +36,11 @@ int main (int argc, int *argv[]) {
     error = calculate_error(atlas_c, atlas_c, size);
     fprintf(results, "atlas, %d, %d, %.2f, %.20f\n", size, t, elapsed_time, error);
     
+    //my_dgemm
+    elapsed_time = my_dgemm(size, a, b, c);
+    error = calculate_error(c, atlas_c, size);
+    fprintf(results, "my_dgemm, %d, %d, %.2f, %.20f\n", size, t, elapsed_time, error);
+    
     //step01
     elapsed_time = step01(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
