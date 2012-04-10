@@ -26,7 +26,7 @@ double calculate_error(double *my_c, double *atlas_c, int n) {
   denomenator = 0;
   for (i = 0; i < size; i++) {
     numerator += pow((my_c[i] - atlas_c[i]), 2);
-    denomenator += pow((my_c[i]), 2);
+    denomenator += pow((atlas_c[i]), 2);
   }
 
   error = sqrt(numerator)/sqrt(denomenator);
