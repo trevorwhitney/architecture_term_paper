@@ -144,7 +144,7 @@ double step03(int n, double *a, double *b, double *c, int t) {
 }
 
 double step04(int n, double *a, double *b, double *c, int t) {
-  int i, j ,k, ii, jj, kk, dif, nxj, nxi;
+  int i, j ,k, ii, jj, kk, dif, nxj;
   clock_t start, end;
   double elapsed_time;
   register double r;
@@ -156,22 +156,20 @@ double step04(int n, double *a, double *b, double *c, int t) {
         for (j = jj; j < MIN(jj+t, n); j++) {
           for (i = ii; i < MIN(ii+t, n); i++) {
             nxj = n*j;
-            nxi = n*i;
             r = c[nxj+i];
-            for (k = kk; k < MIN((kk+t-8), n-8); k+=8) {
-              r += b[k+nxj] * a[nxi+k];
-              r += b[k+nxj] * a[nxi+(k+1)];
-              r += b[k+nxj] * a[nxi+(k+2)];
-              r += b[k+nxj] * a[nxi+(k+3)];
-              r += b[k+nxj] * a[nxi+(k+4)];
-              r += b[k+nxj] * a[nxi+(k+5)];
-              r += b[k+nxj] * a[nxi+(k+6)];
-              r += b[k+nxj] * a[nxi+(k+7)];
+            for (k = kk; k < MIN((kk+t-(n%8)), n-(n%8)); k+=8) {
+              r = r + b[k+nxj] * a[n*k+i];
+              r = r + b[k+nxj] * a[n*(k+1)+i];
+              r = r + b[k+nxj] * a[n*(k+2)+i];
+              r = r + b[k+nxj] * a[n*(k+3)+i];
+              r = r + b[k+nxj] * a[n*(k+4)+i];
+              r = r + b[k+nxj] * a[n*(k+5)+i];
+              r = r + b[k+nxj] * a[n*(k+6)+i];
+              r = r + b[k+nxj] * a[n*(k+7)+i];
             }
             if (n%8 > 0) {
-              dif = n%8 - 1;
-              while (dif > -1)
-                r += b[k+nxj] * a[nxi+(n-dif--)];
+              for (dif = 0; dif < n%8; dif++)
+                r = r + b[k+nxj] * a[n*(n-dif)+i];
             }
             c[i+nxj] = r;
           }
