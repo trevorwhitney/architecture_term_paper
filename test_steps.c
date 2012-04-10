@@ -26,8 +26,8 @@ int main (int argc, int *argv[]) {
     reset_array(size, atlas_c);
 
     for (j = 0; j < size * size; j++) {
-      a[j] = (j % 64.0);
-      b[j] = (j % 64.0);
+      a[j] = (j % 64)*1.0;
+      b[j] = (j % 64)*1.0;
     }
 
     //set tile size
