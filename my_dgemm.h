@@ -158,15 +158,15 @@ double step04(int n, double *a, double *b, double *c, int t) {
           for (i = ii; i < MIN(ii+t, n); i++) {
             nxj = n*j;
             r = c[nxj+i];
-            for (k = kk; k < MIN(kk+t, n-mod); k = k + 8) {
-              r = r + b[k+nxj] * a[n*k+i];
-              r = r + b[k+nxj] * a[n*(k+1)+i];
-              r = r + b[k+nxj] * a[n*(k+2)+i];
-              r = r + b[k+nxj] * a[n*(k+3)+i];
-              r = r + b[k+nxj] * a[n*(k+4)+i];
-              r = r + b[k+nxj] * a[n*(k+5)+i];
-              r = r + b[k+nxj] * a[n*(k+6)+i];
-              r = r + b[k+nxj] * a[n*(k+7)+i];
+            for (k = kk; k < MIN(kk+t-8, n-8-mod); k = k + 8) {
+              r = r + b[nxj+k] * a[n*k+i];
+              r = r + b[nxj+k+1] * a[n*(k+1)+i];
+              r = r + b[nxj+k+2] * a[n*(k+2)+i];
+              r = r + b[nxj+k+3] * a[n*(k+3)+i];
+              r = r + b[nxj+k+4] * a[n*(k+4)+i];
+              r = r + b[nxj+k+5] * a[n*(k+5)+i];
+              r = r + b[nxj+k+6] * a[n*(k+6)+i];
+              r = r + b[nxj+k+7] * a[n*(k+7)+i];
               modk = k + 8;
             }
 
@@ -174,7 +174,7 @@ double step04(int n, double *a, double *b, double *c, int t) {
               for (k = modk; k < n; k++)
                 r = r + b[k+nxj] * a[n*k+i];
             }
-            c[i+nxj] = r;
+            c[nxj+i] = r;
           }
         }
       }
