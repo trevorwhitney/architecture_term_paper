@@ -24,12 +24,12 @@ double calculate_error(double *my_c, double *atlas_c, int n) {
   denomenator = 0.0;
   for (i = 0; i < n; i++) {
     for (j = 0; j < n; j++) {
-      numerator += pow((my_c[i + n*j] - atlas_c[i + n*j]), 2);
+      numerator += pow((atlas_c[i + n*j] - my_c[i + n*j]), 2);
       denomenator += pow((atlas_c[i + n*j]), 2);
     }
   }
 
-  error = numerator/denomenator;
+  error = sqrt(numerator)/sqrt(denomenator);
   return error;
 }
 
