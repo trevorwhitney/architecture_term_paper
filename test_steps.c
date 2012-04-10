@@ -31,7 +31,7 @@ int main (int argc, int *argv[]) {
     }
 
     //set tile size
-    t = 9;
+    t = 8;
 
     //baseline
     elapsed_time = my_cblas_dgemm(size, a, b, atlas_c);
