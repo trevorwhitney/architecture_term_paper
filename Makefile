@@ -21,4 +21,4 @@ tiles: driver.c my_dgemm.h
 	gcc -lcblas -lblas -o tiles driver.c
 
 test_steps: test_steps.c my_dgemm.h
-	gcc -lcblas -lblas -o test_steps test_steps.c
+	gcc -lcblas -lblas -o tests/test_steps test_steps.c
