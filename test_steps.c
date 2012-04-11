@@ -42,9 +42,6 @@ int main (int argc, int *argv[]) {
     elapsed_time = my_dgemm(size, a, b, c);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "my_dgemm, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
-    for (j = 0; j < size * size; j++) {
-      printf("my_dgemm[%d] = %.2f\n", j, c[j]);
-    }
     zero_array(size, c);
 
     //step01
