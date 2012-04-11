@@ -9,7 +9,7 @@ int main (int argc, int *argv[]) {
   double* c;
   double* atlas_c;
 
-  int i, j, k, l, size, t;
+  int i, j, k, l, size, t, ii, jj;
   double elapsed_time, error;
   FILE *results;
 
@@ -67,9 +67,12 @@ int main (int argc, int *argv[]) {
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step04, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
 
-    for (i = 0; i > size; i++)
-      for (j = 0; j < size; j++)
-        printf("step04[%d] = %.2f. atlas[%d] = %.2f, ", i*size+j, c[i*size+j], i*size+j, atlas_c[i*size+j]);
+    for (ii = 0; ii > size; ii++) {
+      for (jj = 0; jj < size; jj++) {
+        printf("step04[%d] = %.2f. atlas[%d] = %.2f, ", 
+          i*size+j, c[i*size+j], i*size+j, atlas_c[i*size+j]);
+      }
+    }
   }
 
   fclose(results);
