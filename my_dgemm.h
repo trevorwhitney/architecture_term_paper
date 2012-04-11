@@ -184,7 +184,7 @@ double step04(int n, double *a, double *b, double *c, int t) {
 }
 
 double step05(int n, double *a, double *b, double *c, int t) {
-  int i, j ,k, ii, jj, kk, dif, nxj0, nxj1, nxj2;
+  int i, j ,k, ii, jj, kk, nxj0, nxj1, nxj2;
   clock_t start, end;
   double elapsed_time;
   double rc0, rc1, rc2, rc3, rc4, rc5, rc6, rc7, rc8, rc9, rc10, rc11, rb0, rb1, 
@@ -357,12 +357,15 @@ double step05(int n, double *a, double *b, double *c, int t) {
               rc0 = rc0 + b[nxj0+k] * a[n*k+i];
               rc4 = rc4 + b[nxj1+k] * a[n*k+i];
               rc8 = rc8 + b[nxj2+k] * a[n*k+i];
+              
               rc1 = rc1 + b[nxj0+k] * a[n*k+i+1];
               rc5 = rc5 + b[nxj1+k] * a[n*k+i+1];
               rc9 = rc9 + b[nxj2+k] * a[n*k+i+1];
+              
               rc2 = rc2 + b[nxj0+k] * a[n*k+i+2];
               rc6 = rc6 + b[nxj1+k] * a[n*k+i+2];
               rc10 = rc10 + b[nxj2+k] * a[n*k+i+2];
+              
               rc3 = rc3 + b[nxj0+k] * a[n*k+i+3];
               rc7 = rc7 + b[nxj1+k] * a[n*k+i+3];
               rc11 = rc11 + b[nxj2+k] * a[n*k+i+3];
