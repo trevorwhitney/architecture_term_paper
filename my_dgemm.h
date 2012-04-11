@@ -150,6 +150,26 @@ double step04(int n, double *a, double *b, double *c, int t) {
   register double r;
 
   start = clock();
+  for (jj = 0; jj < n; jj += t) {
+    for (kk = 0; kk < n; kk += t) {
+      for (ii = 0; ii < n; ii += t) {
+        for (j = jj; j < MIN(jj+t, n); j++) {
+          for (i = ii; i < MIN(ii+t, n); i++) {
+            nxj = n*j;
+            r = c[nxj+i];
+            for (k = kk; k < MIN(kk+t, n); k++) {
+              r = r + b[nxj+k] * a[n*k+i];
+            }
+            c[nxj+i] = r;
+          }
+        }
+      }
+    }
+  }
+  end = clock();
+
+  /*
+  start = clock();
   extra = t%8;
   for (jj = 0; jj < n; jj += t) {
     for (kk = 0; kk < n; kk += t) {
@@ -183,6 +203,7 @@ double step04(int n, double *a, double *b, double *c, int t) {
     }
   }
   end = clock();
+  */
   elapsed_time = ((double) (end-start))/CLOCKS_PER_SEC;
   return elapsed_time;
 }
