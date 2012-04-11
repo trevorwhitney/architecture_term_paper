@@ -9,7 +9,7 @@ int main (int argc, int *argv[]) {
   double* c;
   double* atlas_c;
 
-  int i, j, k, l, size, t, ii, jj;
+  int i, j, k, l, size, t;
   double elapsed_time, error;
   FILE *results;
 
@@ -17,7 +17,7 @@ int main (int argc, int *argv[]) {
   fprintf(results, "Step #, Size of Array, Size of Tiles, Time (Seconds), Error\n");
 
 
-  for (i = 1; i <= 4; i++) {
+  for (i = 1; i <= 1; i++) {
     printf("Starting iteration %d\n", i);
     size = i * 5;
     a = (double*) malloc(size*size*sizeof(double));
@@ -30,6 +30,11 @@ int main (int argc, int *argv[]) {
       b[j] = (j % 64)*1.0;
     }
 
+    for (j = 0; j < size * size; j++) {
+      printf("a[%d] = %.2f\n", j, a[j]);
+      printf("b[%d] = %.2f\n", j, b[j]);
+    }
+
     //set tile size
     t = 9;
 
@@ -37,41 +42,52 @@ int main (int argc, int *argv[]) {
     elapsed_time = my_cblas_dgemm(size, a, b, atlas_c);
     error = calculate_error(atlas_c, atlas_c, size);
     fprintf(results, "atlas, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
+    for (j = 0; j < size * size; j++) {
+      printf("atlas_c[%d] = %.2f\n", j, atlas_c[j];
+    }
     
     //my_dgemm
     elapsed_time = my_dgemm(size, a, b, c);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "my_dgemm, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
+    for (j = 0; j < size * size; j++) {
+      printf("my_dgemm[%d] = %.2f\n", j, c[j];
+    }
     zero_array(size, c);
 
     //step01
     elapsed_time = step01(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step01, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
+    for (j = 0; j < size * size; j++) {
+      printf("step01[%d] = %.2f\n", j, c[j];
+    }
     zero_array(size, c);
 
     //step02
     elapsed_time = step02(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step02, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
+    for (j = 0; j < size * size; j++) {
+      printf("step02[%d] = %.2f\n", j, c[j];
+    }
     zero_array(size, c);
 
     //step03
     elapsed_time = step03(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step03, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
+    for (j = 0; j < size * size; j++) {
+      printf("step03[%d] = %.2f\n", j, c[j];
+    }
     zero_array(size, c);
 
     //step04
     elapsed_time = step04(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step04, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
-
-    for (ii = 0; ii > size; ii++) {
-      for (jj = 0; jj < size; jj++) {
-        printf("step04[%d] = %.2f. atlas[%d] = %.2f, ", 
-          i*size+j, c[i*size+j], i*size+j, atlas_c[i*size+j]);
-      }
+    for (j = 0; j < size * size; j++) {
+      printf("step04[%d] = %.2f\n", j, c[j];
     }
   }
 
