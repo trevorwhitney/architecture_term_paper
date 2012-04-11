@@ -184,31 +184,63 @@ double step04(int n, double *a, double *b, double *c, int t) {
 }
 
 double step05(int n, double *a, double *b, double *c, int t) {
-  int i, j ,k, ii, jj, kk, dif, nxj;
+  int i, j ,k, ii, jj, kk, dif, nxj0, nxj1, nxj2;
   clock_t start, end;
   double elapsed_time;
-  register double rc0, rc1, rc2, rc3, rb0, rb1, rb2, rb3, rb4, rb5, rb6, rb7;
+  register double rc1, rc2, rc3, rb0, rb1, rb2, rb3, rb4, rb5, rb6, rb7;
 
   start = clock();
   for (jj = 0; jj < n; jj += t) {
     for (kk = 0; kk < n; kk += t) {
       for (ii = 0; ii < n; ii += t) {
-        for (j = jj; j < MIN(jj+t, n); j++) {
-          nxj = n*j;
+        for (j = jj; j < MIN(jj+t, n)-3; j+=3) {
+          nxj0 = n*j;
+          nxj1 = n*(j+1);
+          nxj2 = n*(j+2);
+
           for (i = ii; i < MIN(ii+t, n)-4; i+=4) {
-            rc0 = c[nxj+i];
-            rc1 = c[nxj+i+1];
-            rc2 = c[nxj+i+2];
-            rc3 = c[nxj+i+3];
+            rc0 = c[nxj0+i];
+            rc1 = c[nxj0+i+1];
+            rc2 = c[nxj0+i+2];
+            rc3 = c[nxj0+i+3];
+
+            rc4 = c[nxj1+i];
+            rc5 = c[nxj1+i+1];
+            rc6 = c[nxj1+i+2];
+            rc7 = c[nxj1+i+3];
+
+            rc8 = c[nxj2+i];
+            rc9 = c[nxj2+i+1];
+            rc10 = c[nxj2+i+2];
+            rc11 = c[nxj2+i+3];
+
             for (k = kk; k < MIN(kk+t, n)-8; k+=8) {
-              rb0 = b[nxj+k];
-              rb1 = b[nxj+k+1];
-              rb2 = b[nxj+k+2];
-              rb3 = b[nxj+k+3];
-              rb4 = b[nxj+k+4];
-              rb5 = b[nxj+k+5];
-              rb6 = b[nxj+k+6];
-              rb7 = b[nxj+k+7];
+              rb0 = b[nxj0+k];
+              rb1 = b[nxj0+k+1];
+              rb2 = b[nxj0+k+2];
+              rb3 = b[nxj0+k+3];
+              rb4 = b[nxj0+k+4];
+              rb5 = b[nxj0+k+5];
+              rb6 = b[nxj0+k+6];
+              rb7 = b[nxj0+k+7];
+
+              rb8 = b[nxj1+k];
+              rb9 = b[nxj1+k+1];
+              rb10 = b[nxj1+k+2];
+              rb11 = b[nxj1+k+3];
+              rb12 = b[nxj1+k+4];
+              rb13 = b[nxj1+k+5];
+              rb14 = b[nxj1+k+6];
+              rb15 = b[nxj1+k+7];
+
+              rb16 = b[nxj2+k];
+              rb17 = b[nxj2+k+1];
+              rb18 = b[nxj2+k+2];
+              rb19 = b[nxj2+k+3];
+              rb20 = b[nxj2+k+4];
+              rb21 = b[nxj2+k+5];
+              rb22 = b[nxj2+k+6];
+              rb23 = b[nxj2+k+7];
 
               rc0 = rc0 + rb0 * a[n*k+i];
               rc0 = rc0 + rb1 * a[n*(k+1)+i];
@@ -219,6 +251,24 @@ double step05(int n, double *a, double *b, double *c, int t) {
               rc0 = rc0 + rb6 * a[n*(k+6)+i];
               rc0 = rc0 + rb7 * a[n*(k+7)+i];
 
+              rc4 = rc4 + rb8 * a[n*k+i];
+              rc4 = rc4 + rb9 * a[n*(k+1)+i];
+              rc4 = rc4 + rb10 * a[n*(k+2)+i];
+              rc4 = rc4 + rb11 * a[n*(k+3)+i];
+              rc4 = rc4 + rb12 * a[n*(k+4)+i];
+              rc4 = rc4 + rb13 * a[n*(k+5)+i];
+              rc4 = rc4 + rb14 * a[n*(k+6)+i];
+              rc4 = rc4 + rb15 * a[n*(k+7)+i];
+
+              rc8 = rc8 + rb16 * a[n*k+i];
+              rc8 = rc8 + rb17 * a[n*(k+1)+i];
+              rc8 = rc8 + rb18 * a[n*(k+2)+i];
+              rc8 = rc8 + rb19 * a[n*(k+3)+i];
+              rc8 = rc8 + rb20 * a[n*(k+4)+i];
+              rc8 = rc8 + rb21 * a[n*(k+5)+i];
+              rc8 = rc8 + rb22 * a[n*(k+6)+i];
+              rc8 = rc8 + rb23 * a[n*(k+7)+i];
+
               rc1 = rc1 + rb0 * a[n*k+i+1];
               rc1 = rc1 + rb1 * a[n*(k+1)+i+1];
               rc1 = rc1 + rb2 * a[n*(k+2)+i+1];
@@ -227,6 +277,24 @@ double step05(int n, double *a, double *b, double *c, int t) {
               rc1 = rc1 + rb5 * a[n*(k+5)+i+1];
               rc1 = rc1 + rb6 * a[n*(k+6)+i+1];
               rc1 = rc1 + rb7 * a[n*(k+7)+i+1];
+
+              rc5 = rc5 + rb8 * a[n*k+i+1];
+              rc5 = rc5 + rb9 * a[n*(k+1)+i+1];
+              rc5 = rc5 + rb10 * a[n*(k+2)+i+1];
+              rc5 = rc5 + rb11 * a[n*(k+3)+i+1];
+              rc5 = rc5 + rb12 * a[n*(k+4)+i+1];
+              rc5 = rc5 + rb13 * a[n*(k+5)+i+1];
+              rc5 = rc5 + rb14 * a[n*(k+6)+i+1];
+              rc5 = rc5 + rb15 * a[n*(k+7)+i+1];
+
+              rc9 = rc9 + rb16 * a[n*k+i+1];
+              rc9 = rc9 + rb17 * a[n*(k+1)+i+1];
+              rc9 = rc9 + rb18 * a[n*(k+2)+i+1];
+              rc9 = rc9 + rb19 * a[n*(k+3)+i+1];
+              rc9 = rc9 + rb20 * a[n*(k+4)+i+1];
+              rc9 = rc9 + rb21 * a[n*(k+5)+i+1];
+              rc9 = rc9 + rb22 * a[n*(k+6)+i+1];
+              rc9 = rc9 + rb23 * a[n*(k+7)+i+1];
 
               rc2 = rc2 + rb0 * a[n*k+i+2];
               rc2 = rc2 + rb1 * a[n*(k+1)+i+2];
@@ -237,6 +305,24 @@ double step05(int n, double *a, double *b, double *c, int t) {
               rc2 = rc2 + rb6 * a[n*(k+6)+i+2];
               rc2 = rc2 + rb7 * a[n*(k+7)+i+2];
 
+              rc6 = rc6 + rb8 * a[n*k+i+2];
+              rc6 = rc6 + rb9 * a[n*(k+1)+i+2];
+              rc6 = rc6 + rb10 * a[n*(k+2)+i+2];
+              rc6 = rc6 + rb11 * a[n*(k+3)+i+2];
+              rc6 = rc6 + rb12 * a[n*(k+4)+i+2];
+              rc6 = rc6 + rb13 * a[n*(k+5)+i+2];
+              rc6 = rc6 + rb14 * a[n*(k+6)+i+2];
+              rc6 = rc6 + rb15 * a[n*(k+7)+i+2];
+
+              rc10 = rc10 + rb16 * a[n*k+i+2];
+              rc10 = rc10 + rb17 * a[n*(k+1)+i+2];
+              rc10 = rc10 + rb18 * a[n*(k+2)+i+2];
+              rc10 = rc10 + rb19 * a[n*(k+3)+i+2];
+              rc10 = rc10 + rb20 * a[n*(k+4)+i+2];
+              rc10 = rc10 + rb21 * a[n*(k+5)+i+2];
+              rc10 = rc10 + rb22 * a[n*(k+6)+i+2];
+              rc10 = rc10 + rb23 * a[n*(k+7)+i+2];
+
               rc3 = rc3 + rb0 * a[n*k+i+3];
               rc3 = rc3 + rb1 * a[n*(k+1)+i+3];
               rc3 = rc3 + rb2 * a[n*(k+2)+i+3];
@@ -246,12 +332,152 @@ double step05(int n, double *a, double *b, double *c, int t) {
               rc3 = rc3 + rb6 * a[n*(k+6)+i+3];
               rc3 = rc3 + rb7 * a[n*(k+7)+i+3];
 
+              rc7 = rc7 + rb8 * a[n*k+i+3];
+              rc7 = rc7 + rb9 * a[n*(k+1)+i+3];
+              rc7 = rc7 + rb10 * a[n*(k+2)+i+3];
+              rc7 = rc7 + rb11 * a[n*(k+3)+i+3];
+              rc7 = rc7 + rb12 * a[n*(k+4)+i+3];
+              rc7 = rc7 + rb13 * a[n*(k+5)+i+3];
+              rc7 = rc7 + rb14 * a[n*(k+6)+i+3];
+              rc7 = rc7 + rb15 * a[n*(k+7)+i+3];
+
+              rc11 = rc11 + rb16 * a[n*k+i+3];
+              rc11 = rc11 + rb17 * a[n*(k+1)+i+3];
+              rc11 = rc11 + rb18 * a[n*(k+2)+i+3];
+              rc11 = rc11 + rb19 * a[n*(k+3)+i+3];
+              rc11 = rc11 + rb20 * a[n*(k+4)+i+3];
+              rc11 = rc11 + rb21 * a[n*(k+5)+i+3];
+              rc11 = rc11 + rb22 * a[n*(k+6)+i+3];
+              rc11 = rc11 + rb23 * a[n*(k+7)+i+3];
+
             }
             for (k; k < MIN(kk+t, n); k++) {
-              rc0 = rc0 + b[nxj+k] * a[n*k+i];
-              rc1 = rc1 + b[nxj+k] * a[n*k+i+1];
-              rc2 = rc2 + b[nxj+k] * a[n*k+i+2];
-              rc3 = rc3 + b[nxj+k] * a[n*k+i+3];
+              rc0 = rc0 + b[nxj0+k] * a[n*k+i];
+              rc4 = rc4 + b[nxj1+k] * a[n*k+i];
+              rc8 = rc8 + b[nxj2+k] * a[n*k+i];
+              rc1 = rc1 + b[nxj0+k] * a[n*k+i+1];
+              rc5 = rc5 + b[nxj1+k] * a[n*k+i+1];
+              rc9 = rc9 + b[nxj2+k] * a[n*k+i+1];
+              rc2 = rc2 + b[nxj0+k] * a[n*k+i+2];
+              rc6 = rc6 + b[nxj1+k] * a[n*k+i+2];
+              rc10 = rc10 + b[nxj2+k] * a[n*k+i+2];
+              rc3 = rc3 + b[nxj0+k] * a[n*k+i+3];
+              rc7 = rc7 + b[nxj1+k] * a[n*k+i+3];
+              rc11 = rc11 + b[nxj2+k] * a[n*k+i+3];
+            }
+            c[nxj0+i] = rc0;
+            c[nxj1+i] = rc4;
+            c[nxj2+i] = rc8;
+            c[nxj0+i+1] = rc1;
+            c[nxj1+i+1] = rc5;
+            c[nxj2+i+1] = rc9;
+            c[nxj0+i+2] = rc2;
+            c[nxj1+i+2] = rc6;
+            c[nxj2+i+2] = rc10;
+            c[nxj0+i+3] = rc3;
+            c[nxj1+i+3] = rc7;
+            c[nxj2+i+3] = rc11;
+          }
+          for (i; i < MIN(ii+t, n); i++) {
+            rc0 = c[nxj0+i];
+            rc1 = c[nxj1+i];
+            rc2 = c[nxj2+i];
+            for (k = kk; k < MIN(kk+t, n)-8; k+=8) {
+              rc0 = rc0 + b[nxj0+k] * a[n*k+i];
+              rc0 = rc0 + b[nxj0+k+1] * a[n*(k+1)+i];
+              rc0 = rc0 + b[nxj0+k+2] * a[n*(k+2)+i];
+              rc0 = rc0 + b[nxj0+k+3] * a[n*(k+3)+i];
+              rc0 = rc0 + b[nxj0+k+4] * a[n*(k+4)+i];
+              rc0 = rc0 + b[nxj0+k+5] * a[n*(k+5)+i];
+              rc0 = rc0 + b[nxj0+k+6] * a[n*(k+6)+i];
+              rc0 = rc0 + b[nxj0+k+7] * a[n*(k+7)+i];
+
+              rc1 = rc1 + b[nxj1+k] * a[n*k+i];
+              rc1 = rc1 + b[nxj1+k+1] * a[n*(k+1)+i];
+              rc1 = rc1 + b[nxj1+k+2] * a[n*(k+2)+i];
+              rc1 = rc1 + b[nxj1+k+3] * a[n*(k+3)+i];
+              rc1 = rc1 + b[nxj1+k+4] * a[n*(k+4)+i];
+              rc1 = rc1 + b[nxj1+k+5] * a[n*(k+5)+i];
+              rc1 = rc1 + b[nxj1+k+6] * a[n*(k+6)+i];
+              rc1 = rc1 + b[nxj1+k+7] * a[n*(k+7)+i];
+
+              rc2 = rc2 + b[nxj2+k] * a[n*k+i];
+              rc2 = rc2 + b[nxj2+k+1] * a[n*(k+1)+i];
+              rc2 = rc2 + b[nxj2+k+2] * a[n*(k+2)+i];
+              rc2 = rc2 + b[nxj2+k+3] * a[n*(k+3)+i];
+              rc2 = rc2 + b[nxj2+k+4] * a[n*(k+4)+i];
+              rc2 = rc2 + b[nxj2+k+5] * a[n*(k+5)+i];
+              rc2 = rc2 + b[nxj2+k+6] * a[n*(k+6)+i];
+              rc2 = rc2 + b[nxj2+k+7] * a[n*(k+7)+i];
+            }
+            for (k; k < MIN(kk+t, n); k++) {
+              rc0 = rc0 + b[nxj0+k] * a[n*k+i];
+              rc1 = rc1 + b[nxj1+k] * a[n*k+i];
+              rc2 = rc2 + b[nxj2+k] * a[n*k+i];
+            }
+            c[nxj0+i] = rc0;
+            c[nxj1+i] = rc1;
+            c[nxj2+i] = rc2;
+          }
+        }
+        for (j; j < MIN(jj+t, n); j++) {
+          nxj0 = n*j;
+          for (i = ii; i < MIN(ii+t, n)-4; i+=4) {
+            rc0 = c[nxj0+i];
+            rc1 = c[nxj0+i+1];
+            rc2 = c[nxj0+i+2];
+            rc3 = c[nxj0+i+3];
+            for (k = kk; k < MIN(kk+t, n)-8; k+=8) {
+              rb0 = b[nxj0+k];
+              rb1 = b[nxj0+k+1];
+              rb2 = b[nxj0+k+2];
+              rb3 = b[nxj0+k+3];
+              rb4 = b[nxj0+k+4];
+              rb5 = b[nxj0+k+5];
+              rb6 = b[nxj0+k+6];
+              rb7 = b[nxj0+k+7];
+
+              rc0 = rc0 + rb0 * a[n*k+i];
+              rc0 = rc0 + rb1 * a[n*(k+1)+i];
+              rc0 = rc0 + rb2 * a[n*(k+2)+i];
+              rc0 = rc0 + rb3 * a[n*(k+3)+i];
+              rc0 = rc0 + rb4 * a[n*(k+4)+i];
+              rc0 = rc0 + rb5 * a[n*(k+5)+i];
+              rc0 = rc0 + rb6 * a[n*(k+6)+i];
+              rc0 = rc0 + rb7 * a[n*(k+7)+i];
+
+              rc1 = rc1 + rb0 * a[n*k+i];
+              rc1 = rc1 + rb1 * a[n*(k+1)+i+1];
+              rc1 = rc1 + rb2 * a[n*(k+2)+i+1];
+              rc1 = rc1 + rb3 * a[n*(k+3)+i+1];
+              rc1 = rc1 + rb4 * a[n*(k+4)+i+1];
+              rc1 = rc1 + rb5 * a[n*(k+5)+i+1];
+              rc1 = rc1 + rb6 * a[n*(k+6)+i+1];
+              rc1 = rc1 + rb7 * a[n*(k+7)+i+1];
+
+              rc2 = rc2 + rb0 * a[n*k+i];
+              rc2 = rc2 + rb1 * a[n*(k+1)+i+2];
+              rc2 = rc2 + rb2 * a[n*(k+2)+i+2];
+              rc2 = rc2 + rb3 * a[n*(k+3)+i+2];
+              rc2 = rc2 + rb4 * a[n*(k+4)+i+2];
+              rc2 = rc2 + rb5 * a[n*(k+5)+i+2];
+              rc2 = rc2 + rb6 * a[n*(k+6)+i+2];
+              rc2 = rc2 + rb7 * a[n*(k+7)+i+2];
+
+              rc3 = rc3 + rb0 * a[n*k+i];
+              rc3 = rc3 + rb1 * a[n*(k+1)+i+3];
+              rc3 = rc3 + rb2 * a[n*(k+2)+i+3];
+              rc3 = rc3 + rb3 * a[n*(k+3)+i+3];
+              rc3 = rc3 + rb4 * a[n*(k+4)+i+3];
+              rc3 = rc3 + rb5 * a[n*(k+5)+i+3];
+              rc3 = rc3 + rb6 * a[n*(k+6)+i+3];
+              rc3 = rc3 + rb7 * a[n*(k+7)+i+3];
+            }
+            for (k; k < MIN(kk+t, n); k++) {
+              rc0 = rc0 + b[nxj0+k] * a[n*k+i];
+              rc1 = rc1 + b[nxj0+k] * a[n*k+i+1];
+              rc2 = rc2 + b[nxj0+k] * a[n*k+i+2];
+              rc3 = rc3 + b[nxj0+k] * a[n*k+i+3];
             }
             c[nxj+i] = rc0;
             c[nxj+i+1] = rc1;
@@ -259,21 +485,21 @@ double step05(int n, double *a, double *b, double *c, int t) {
             c[nxj+i+3] = rc3;
           }
           for (i; i < MIN(ii+t, n); i++) {
-            rc0 = c[nxj+i];
+            rc0 = c[nxj0+i];
             for (k = kk; k < MIN(kk+t, n)-8; k+=8) {
-              rc0 = rc0 + b[nxj+k] * a[n*k+i];
-              rc0 = rc0 + b[nxj+k+1] * a[n*(k+1)+i];
-              rc0 = rc0 + b[nxj+k+2] * a[n*(k+2)+i];
-              rc0 = rc0 + b[nxj+k+3] * a[n*(k+3)+i];
-              rc0 = rc0 + b[nxj+k+4] * a[n*(k+4)+i];
-              rc0 = rc0 + b[nxj+k+5] * a[n*(k+5)+i];
-              rc0 = rc0 + b[nxj+k+6] * a[n*(k+6)+i];
-              rc0 = rc0 + b[nxj+k+7] * a[n*(k+7)+i];
+              rc0 = rc0 + b[nxj0+k] * a[n*k+i];
+              rc0 = rc0 + b[nxj0+k+1] * a[n*(k+1)+i];
+              rc0 = rc0 + b[nxj0+k+2] * a[n*(k+2)+i];
+              rc0 = rc0 + b[nxj0+k+3] * a[n*(k+3)+i];
+              rc0 = rc0 + b[nxj0+k+4] * a[n*(k+4)+i];
+              rc0 = rc0 + b[nxj0+k+5] * a[n*(k+5)+i];
+              rc0 = rc0 + b[nxj0+k+6] * a[n*(k+6)+i];
+              rc0 = rc0 + b[nxj0+k+7] * a[n*(k+7)+i];
             }
             for (k; k < MIN(kk+t, n); k++) {
-              rc0 = rc0 + b[nxj+k] * a[n*k+i];
+              rc0 = rc0 + b[nxj0+k] * a[n*k+i];
             }
-            c[nxj+i] = rc0;
+            c[nxj0+i] = rc0;
           }
         }
       }
