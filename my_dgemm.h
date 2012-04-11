@@ -157,7 +157,7 @@ double step04(int n, double *a, double *b, double *c, int t) {
           nxj = n*j;
           for (i = ii; i < MIN(ii+t, n); i++) {
             r = c[nxj+i];
-            for (k = kk; k < MIN(kk+t, n)-7; k+=7) {
+            for (k = kk; k < MIN(kk+t, n)-8; k+=8) {
               r = r + b[nxj+k] * a[n*k+i];
               r = r + b[nxj+k+1] * a[n*(k+1)+i];
               r = r + b[nxj+k+2] * a[n*(k+2)+i];
@@ -165,6 +165,7 @@ double step04(int n, double *a, double *b, double *c, int t) {
               r = r + b[nxj+k+4] * a[n*(k+4)+i];
               r = r + b[nxj+k+5] * a[n*(k+5)+i];
               r = r + b[nxj+k+6] * a[n*(k+6)+i];
+              r = r + b[nxj+k+7] * a[n*(k+7)+i];
             }
             for (k; k < MIN(kk+t, n); k++) {
               r = r + b[nxj+k] * a[n*k+i];
