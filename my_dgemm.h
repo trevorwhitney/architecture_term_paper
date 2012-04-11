@@ -144,7 +144,7 @@ double step03(int n, double *a, double *b, double *c, int t) {
 }
 
 double step04(int n, double *a, double *b, double *c, int t) {
-  int i, j ,k, ii, jj, kk, dif, nxj, extra, extra_count;
+  int i, j ,k, ii, jj, kk, dif, nxj;
   clock_t start, end;
   double elapsed_time;
   register double r;
