@@ -162,7 +162,7 @@ double step04(int n, double *a, double *b, double *c, int t) {
               r = r + b[nxj+k] * a[n*k+i];
               r = r + b[nxj+k+1] * a[n*(k+1)+i];
             }
-            for (k; k < MIN(t, n)-extra; k++) {
+            for (k; k < MIN(kk+t, n); k++) {
               r = r + b[nxj+k] * a[n*k+i];
             }
             c[nxj+i] = r;
