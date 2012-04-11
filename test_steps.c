@@ -69,8 +69,7 @@ int main (int argc, int *argv[]) {
 
     for (i = 0; i > size; i++)
       for (j = 0; j < size; j++)
-        printf("step04[%d] = %.2f. atlas[%d] = %.2f, ", 
-          i*size+j, c[i*size+j], i*size+j, atlas_c[i*size+j]);
+        printf("step04[%d] = %.2f. atlas[%d] = %.2f, ", i*size+j, c[i*size+j], i*size+j, atlas_c[i*size+j]);
   }
 
   fclose(results);
