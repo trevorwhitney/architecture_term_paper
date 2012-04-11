@@ -66,6 +66,14 @@ int main (int argc, int *argv[]) {
     elapsed_time = step04(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step04, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
+    zero_array(size, c);
+
+    //step05
+    elapsed_time = step05(size, a, b, c, t);
+    error = calculate_error(c, atlas_c, size);
+    fprintf(results, "step05, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
+
+
     /*
     for (j = 0; j < size * size; j++) {
       printf("step04[%d] = %.2f\t atlas_c[%d] = %.2f\n", j, c[j], j, atlas_c[j]);
