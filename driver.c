@@ -22,7 +22,7 @@ int main (int argc, int *argv[]) {
   //fprintf(atlas_csv, "Iteration #, Size of Array, Time (Seconds)\n");
 
 
-  for (i = 1; i <= 5; i++) {
+  for (i = 1; i < 5; i++) {
     printf("Starting iteration %d\n", i);
     size = i * 500;
     a = (double*) malloc(size*size*sizeof(double));
