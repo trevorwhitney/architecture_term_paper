@@ -144,12 +144,13 @@ double step03(int n, double *a, double *b, double *c, int t) {
 }
 
 double step04(int n, double *a, double *b, double *c, int t) {
-  int i, j ,k, ii, jj, kk, dif, nxj;
+  int i, j ,k, ii, jj, kk, dif, nxj, extra, extra_count;
   clock_t start, end;
   double elapsed_time;
   register double r;
 
   start = clock();
+  extra = t%8;
   for (jj = 0; jj < n; jj += t) {
     for (kk = 0; kk < n; kk += t) {
       for (ii = 0; ii < n; ii += t) {
@@ -157,7 +158,7 @@ double step04(int n, double *a, double *b, double *c, int t) {
           for (i = ii; i < MIN(ii+t, n); i++) {
             nxj = n*j;
             r = c[nxj+i];
-            for (k = kk; k < MIN(kk+t-(t%8), n-8); k = k + 8) {
+            for (k = kk; k + extra < MIN(kk+t, n); k = k + 8) {
               r = r + b[nxj+k] * a[n*k+i];
               r = r + b[nxj+k+1] * a[n*(k+1)+i];
               r = r + b[nxj+k+2] * a[n*(k+2)+i];
@@ -168,16 +169,12 @@ double step04(int n, double *a, double *b, double *c, int t) {
               r = r + b[nxj+k+7] * a[n*(k+7)+i];
             }
 
-            if (t%8 > 0 || k >= n-8) {
-              if (k >= n-8) {
-                for(k; k < n; k++)
-                  r = r + b[nxj+k] * a[n*k+i];
+            if (extra > 0) {
+              for(extra_count = 0; extra_count < extra; extra_count++) {
+                r = r + b[nxj+k] * a[n*k+i];
+                k++;
               }
-              else {
-                for(k; k < k + t%8; k++)
-                  r = r + b[nxj+k] * a[n*k+i];
-              }
-            }
+            }   
 
             c[nxj+i] = r;
           }
