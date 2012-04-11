@@ -17,7 +17,7 @@ int main (int argc, int *argv[]) {
   fprintf(results, "Step #, Size of Array, Size of Tiles, Time (Seconds), Error\n");
 
 
-  for (i = 1; i < 11; i++) {
+  for (i = 1; i < 5; i++) {
     printf("Starting iteration %d\n", i);
     size = i * 500;
     a = (double*) malloc(size*size*sizeof(double));
