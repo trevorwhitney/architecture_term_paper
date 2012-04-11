@@ -19,7 +19,7 @@ int main (int argc, int *argv[]) {
 
   for (i = 1; i < 5; i++) {
     printf("Starting iteration %d\n", i);
-    size = i * 500;
+    size = i * 50;
     a = (double*) malloc(size*size*sizeof(double));
     b = (double*) malloc(size*size*sizeof(double));
     c = (double*) malloc(size*size*sizeof(double));
