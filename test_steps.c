@@ -43,7 +43,7 @@ int main (int argc, int *argv[]) {
     error = calculate_error(atlas_c, atlas_c, size);
     fprintf(results, "atlas, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
     for (j = 0; j < size * size; j++) {
-      printf("atlas_c[%d] = %.2f\n", j, atlas_c[j];
+      printf("atlas_c[%d] = %.2f\n", j, atlas_c[j]);
     }
     
     //my_dgemm
@@ -51,7 +51,7 @@ int main (int argc, int *argv[]) {
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "my_dgemm, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
     for (j = 0; j < size * size; j++) {
-      printf("my_dgemm[%d] = %.2f\n", j, c[j];
+      printf("my_dgemm[%d] = %.2f\n", j, c[j]);
     }
     zero_array(size, c);
 
@@ -60,7 +60,7 @@ int main (int argc, int *argv[]) {
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step01, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
     for (j = 0; j < size * size; j++) {
-      printf("step01[%d] = %.2f\n", j, c[j];
+      printf("step01[%d] = %.2f\n", j, c[j]);
     }
     zero_array(size, c);
 
@@ -69,7 +69,7 @@ int main (int argc, int *argv[]) {
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step02, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
     for (j = 0; j < size * size; j++) {
-      printf("step02[%d] = %.2f\n", j, c[j];
+      printf("step02[%d] = %.2f\n", j, c[j]);
     }
     zero_array(size, c);
 
@@ -78,7 +78,7 @@ int main (int argc, int *argv[]) {
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step03, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
     for (j = 0; j < size * size; j++) {
-      printf("step03[%d] = %.2f\n", j, c[j];
+      printf("step03[%d] = %.2f\n", j, c[j]);
     }
     zero_array(size, c);
 
@@ -87,7 +87,7 @@ int main (int argc, int *argv[]) {
     error = calculate_error(c, atlas_c, size);
     fprintf(results, "step04, %d, %d, %.2f, %.30f\n", size, t, elapsed_time, error);
     for (j = 0; j < size * size; j++) {
-      printf("step04[%d] = %.2f\n", j, c[j];
+      printf("step04[%d] = %.2f\n", j, c[j]);
     }
   }
 
