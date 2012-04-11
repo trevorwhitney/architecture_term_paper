@@ -1,13 +1,1 @@
-12 - O1
-10 - O2
-08 - O3
-06 - O3_funroll
-
-Tiles:
-orig - 12
-new - 4
-
-
-Latest 4/10
-test_steps - 18
-tiles - 19
+tiles - 7

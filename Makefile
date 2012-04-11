@@ -23,3 +23,9 @@ tiles: driver.c my_dgemm.h
 test_steps: test_steps.c my_dgemm.h
 	rm tests/*
 	gcc -lcblas -lblas -o tests/test_steps test_steps.c
+
+final: final.c my_dgemm.h
+	gcc -O1 -lcblas -lblas -o O1/final_O1 final.c
+	gcc -O2 -lcblas -lblas -o O2/final_O2 final.c
+	gcc -O3 -lcblas -lblas -o O3/final_O3 final.c
+	gcc -O3 -funroll-loops -lcblas -lblas -o O3_funroll/final_O3_funroll final.c

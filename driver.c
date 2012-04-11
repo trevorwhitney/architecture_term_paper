@@ -41,7 +41,7 @@ int main (int argc, int *argv[]) {
     for(t = 16; t < 65; t++) {
       elapsed_time = step01(size, a, b, c, t);
       error = calculate_error(c, atlas_c, size);
-      fprintf(results, "%d, %d, %d, %.2f, %.5f\n", i, size, t, elapsed_time, error);
+      fprintf(results, "%d, %d, %d, %.5f, %.10f\n", i, size, t, elapsed_time, error);
       zero_array(size, c);
     }
 
