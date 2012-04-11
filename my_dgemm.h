@@ -187,7 +187,7 @@ double step05(int n, double *a, double *b, double *c, int t) {
   int i, j ,k, ii, jj, kk, dif, nxj;
   clock_t start, end;
   double elapsed_time;
-  register double rc0, rc1, rc2, rc3, rb0, rb1, rb2, rb3;
+  register double rc0, rc1, rc2, rc3, rb0, rb1, rb2, rb3, rb4, rb5, rb6, rb7;
 
   start = clock();
   for (jj = 0; jj < n; jj += t) {
