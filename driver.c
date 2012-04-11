@@ -38,7 +38,7 @@ int main (int argc, int *argv[]) {
     elapsed_time = my_cblas_dgemm(size, a, b, atlas_c);
     //fprintf(atlas_csv, "%d, %d, %.2f\n", i, size, elapsed_time);
 
-    for(t = 7; t < 25; t++) {
+    for(t = 16; t < 65; t++) {
       elapsed_time = step01(size, a, b, c, t);
       error = calculate_error(c, atlas_c, size);
       fprintf(results, "%d, %d, %d, %.2f, %.5f\n", i, size, t, elapsed_time, error);
