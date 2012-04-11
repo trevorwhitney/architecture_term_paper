@@ -187,7 +187,9 @@ double step05(int n, double *a, double *b, double *c, int t) {
   int i, j ,k, ii, jj, kk, dif, nxj0, nxj1, nxj2;
   clock_t start, end;
   double elapsed_time;
-  register double rc1, rc2, rc3, rb0, rb1, rb2, rb3, rb4, rb5, rb6, rb7;
+  double rc0, rc1, rc2, rc3, rc4, rc5, rc6, rc7, rc8, rc9, rc10, rc11, rb0, rb1, 
+    rb2, rb3, rb4, rb5, rb6, rb7, rb8, rb9, rb10, rb11, rb12, rb13, rb14, rb15, 
+    rb16, rb17, rb18, rb19, rb20, rb21, rb22, rb23, rb24;
 
   start = clock();
   for (jj = 0; jj < n; jj += t) {
@@ -479,10 +481,10 @@ double step05(int n, double *a, double *b, double *c, int t) {
               rc2 = rc2 + b[nxj0+k] * a[n*k+i+2];
               rc3 = rc3 + b[nxj0+k] * a[n*k+i+3];
             }
-            c[nxj+i] = rc0;
-            c[nxj+i+1] = rc1;
-            c[nxj+i+2] = rc2;
-            c[nxj+i+3] = rc3;
+            c[nxj0+i] = rc0;
+            c[nxj0+i+1] = rc1;
+            c[nxj0+i+2] = rc2;
+            c[nxj0+i+3] = rc3;
           }
           for (i; i < MIN(ii+t, n); i++) {
             rc0 = c[nxj0+i];
