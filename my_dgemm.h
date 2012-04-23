@@ -309,17 +309,17 @@ double step05(int n, double *a, double *b, double *c, int t) {
         for (j = jj; j < MIN(jj+t, n); j++) {
           nxj0 = n*j;
           for (i = ii; i < MIN(ii+t, n); i++) {
-            r = c[nxj0+i];
+            rc0 = c[nxj0+i];
             for (k = kk; k < MIN(kk+t, n)-4; k+=4) {
-              r = r + b[nxj0+k] * a[n*k+i];
-              r = r + b[nxj0+k+1] * a[n*(k+1)+i];
-              r = r + b[nxj0+k+2] * a[n*(k+2)+i];
-              r = r + b[nxj0+k+3] * a[n*(k+3)+i];
+              rc0 = rc0 + b[nxj0+k] * a[n*k+i];
+              rc0 = rc0 + b[nxj0+k+1] * a[n*(k+1)+i];
+              rc0 = rc0 + b[nxj0+k+2] * a[n*(k+2)+i];
+              rc0 = rc0 + b[nxj0+k+3] * a[n*(k+3)+i];
             }
             for (k; k < MIN(kk+t, n); k++) {
-              r = r + b[nxj0+k] * a[n*k+i];
+              rc0 = rc0 + b[nxj0+k] * a[n*k+i];
             }
-            c[nxj0+i] = r;
+            c[nxj0+i] = rc0;
           }
         }
       }
