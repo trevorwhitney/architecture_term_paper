@@ -13,7 +13,7 @@ class ResultsFile
       @results << Array.new(10)
       @error << Array.new(10)
     end
-    o0 = CSV.foreach(file) do |row|
+    o0 = CSV.foreach(file, :header => :first_row, :return_headers => false) do |row|
       index = row[1].to_i/500 - 1
       
       if row[0] == "atlas"
@@ -36,7 +36,7 @@ class ResultsFile
   end
 
   def parse_data(algorithm_id, index, row)
-    @results[algorithm_id][index] = row[3].to_i
+    @results[algorithm_id][index] = row[3].to_f
     @error[algorithm_id][index] = row[4].to_f
   end
 
