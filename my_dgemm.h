@@ -191,7 +191,7 @@ double step05(int n, double *a, double *b, double *c, int t) {
     rb2, rb3, rb4, rb5, rb6, rb7, rb8, rb9, rb10, rb11, rb12, rb13, rb14, rb15, 
     rb16, rb17, rb18, rb19, rb20, rb21, rb22, rb23, rb24;
 
-  start = clock();
+  /*start = clock();
   for (jj = 0; jj < n; jj += t) {
     for (kk = 0; kk < n; kk += t) {
       for (ii = 0; ii < n; ii += t) {
@@ -295,6 +295,31 @@ double step05(int n, double *a, double *b, double *c, int t) {
             c[nxj1+i+2] = rc6;
             c[nxj0+i+3] = rc3;
             c[nxj1+i+3] = rc7;
+          }
+        }
+      }
+    }
+  }
+  end = clock();*/
+
+  start = clock();
+  for (jj = 0; jj < n; jj += t) {
+    for (kk = 0; kk < n; kk += t) {
+      for (ii = 0; ii < n; ii += t) {
+        for (j = jj; j < MIN(jj+t, n); j++) {
+          nxj = n*j;
+          for (i = ii; i < MIN(ii+t, n); i++) {
+            r = c[nxj+i];
+            for (k = kk; k < MIN(kk+t, n)-4; k+=4) {
+              r = r + b[nxj+k] * a[n*k+i];
+              r = r + b[nxj+k+1] * a[n*(k+1)+i];
+              r = r + b[nxj+k+2] * a[n*(k+2)+i];
+              r = r + b[nxj+k+3] * a[n*(k+3)+i];
+            }
+            for (k; k < MIN(kk+t, n); k++) {
+              r = r + b[nxj+k] * a[n*k+i];
+            }
+            c[nxj+i] = r;
           }
         }
       }
