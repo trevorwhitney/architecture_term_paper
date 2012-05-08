@@ -36,42 +36,42 @@ int main (int argc, int *argv[]) {
     //baseline
     elapsed_time = my_cblas_dgemm(size, a, b, atlas_c);
     error = calculate_error(atlas_c, atlas_c, size);
-    fprintf(results, "atlas, %d, %d, %.5f, %.30f\n", size, t, elapsed_time, error);
+    fprintf(results, "atlas, %d, %d, %.5f, %e\n", size, t, elapsed_time, error);
     
     //my_dgemm
     elapsed_time = my_dgemm(size, a, b, c);
     error = calculate_error(c, atlas_c, size);
-    fprintf(results, "my_dgemm, %d, %d, %.5f, %.30f\n", size, t, elapsed_time, error);
+    fprintf(results, "my_dgemm, %d, %d, %.5f, %e\n", size, t, elapsed_time, error);
     zero_array(size, c);
 
     //step01
     elapsed_time = step01(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
-    fprintf(results, "step01, %d, %d, %.5f, %.30f\n", size, t, elapsed_time, error);
+    fprintf(results, "step01, %d, %d, %.5f, %e\n", size, t, elapsed_time, error);
     zero_array(size, c);
 
     //step02
     elapsed_time = step02(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
-    fprintf(results, "step02, %d, %d, %.5f, %.30f\n", size, t, elapsed_time, error);
+    fprintf(results, "step02, %d, %d, %.5f, %.e\n", size, t, elapsed_time, error);
     zero_array(size, c);
 
     //step03
     elapsed_time = step03(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
-    fprintf(results, "step03, %d, %d, %.5f, %.30f\n", size, t, elapsed_time, error);
+    fprintf(results, "step03, %d, %d, %.5f, %e\n", size, t, elapsed_time, error);
     zero_array(size, c);
 
     //step04
     elapsed_time = step04(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
-    fprintf(results, "step04, %d, %d, %.5f, %.30f\n", size, t, elapsed_time, error);
+    fprintf(results, "step04, %d, %d, %.5f, %e\n", size, t, elapsed_time, error);
     zero_array(size, c);
 
     //step05
     elapsed_time = step05(size, a, b, c, t);
     error = calculate_error(c, atlas_c, size);
-    fprintf(results, "step05, %d, %d, %.5f, %.30f\n", size, t, elapsed_time, error);
+    fprintf(results, "step05, %d, %d, %.5f, %e\n", size, t, elapsed_time, error);
 
 
     /*
