@@ -27,7 +27,7 @@ test_steps: test_steps.c my_dgemm.h
 
 final: final.c my_dgemm.h
 	gcc -lcblas -lblas -o O0/final_O0 final.c
-	gcc -funroll-loops -lcblas -lblas -o O0_funroll/final_00_funroll final.c
+	gcc -funroll-loops -lcblas -lblas -o O0_funroll/final_O0_funroll final.c
 	gcc -O1 -lcblas -lblas -o O1/final_O1 final.c
 	gcc -O1 -funroll-loops -lcblas -lblas -o O1_funroll/final_O1_funroll final.c
 	gcc -O2 -lcblas -lblas -o O2/final_O2 final.c
