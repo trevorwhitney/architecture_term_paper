@@ -26,8 +26,8 @@ int main (int argc, int *argv[]) {
     atlas_c = (double*) malloc(size*size*sizeof(double));
 
     for (j = 0; j < size * size; j++) {
-      a[j] = (j % 64)*1.0;
-      b[j] = (j % 64)*1.0;
+      a[j] = (j % 64)*1.0/100000000000;
+      b[j] = (j % 64)*1.0/100000000000;
     }
 
     //set tile size
